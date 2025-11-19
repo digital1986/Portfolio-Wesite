@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timothy Nwadike</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    :root{--bg:#05070f;--card:#0d111c;--primary:#00e7ff;--text:#f0f8ff;--muted:#94a3b8;--glow-color:rgba(0,231,255,.5)}*{margin:0;padding:0;box-sizing:border-box}
+    html, body { height: 100%; margin:0; padding:0; }
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;background-image:radial-gradient(circle at 20% 80%,rgba(0,231,255,.08)0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,0,170,.08)0%,transparent 50%)}
+    
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.4rem 5%;background:rgba(5,7,15,.7);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,231,255,.15)}.nav-links{display:flex;justify-content:center;gap:3.5rem;align-items:center;flex-wrap:wrap}.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:1.1rem;position:relative;transition:all .4s;cursor:pointer}.nav-links a:hover,.nav-links a.active{color:var(--primary)}.nav-links a::after{content:'';position:absolute;width:0;height:2px;bottom:-8px;left:50%;background:var(--primary);transition:width .4s;transform:translateX(-50%);box-shadow:0 0 15px var(--primary)}.nav-links a:hover::after,.nav-links a.active::after{width:80%}.download-cv{background:rgba(0,231,255,.15);color:var(--primary)!important;padding:.75rem 1.6rem;border-radius:50px;border:2px solid var(--primary);font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:.7rem;transition:all .4s;backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(0,231,255,.25);cursor:pointer}.download-cv:hover{background:var(--primary);color:#000!important;transform:translateY(-5px) scale(1.07);box-shadow:0 25px 60px rgba(0,231,255,.6)}.download-cv i{font-size:1.4rem;transition:transform .4s}.download-cv:hover i{transform:translateY(4px)}.container{max-width:1360px;margin:0 auto;padding:7rem 5% 4rem;display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start}@media(max-width:992px){.container{grid-template-columns:1fr;padding-top:6rem}}
+
+    /* HERO SECTION */
+    .hero{
+      text-align:left;
+      padding:2rem 0;
+      max-width:600px;
+      position: relative;
+    }
+    .avatar{
+      width:130px;
+      height:130px;
+      margin:0 0 1.5rem 0;
+      border-radius:50%;
+      padding:8px;
+      position:relative;
+      box-shadow:0 0 40px var(--glow-color),0 0 80px rgba(0,231,255,.4);
+      display:block;
+      animation: none; /* ← NO ROTATION ON AVATAR */
+    }
+    /* ROTATING BORDER ONLY */
+    .avatar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: conic-gradient(from 0deg, var(--primary), #ff00aa, #8000ff, var(--primary));
+      border-radius: 50%;
+      animation: r 8s linear infinite;
+      z-index: -1;
+    }
+    @keyframes r { to { transform: rotate(360deg); } }
+    .avatar img{
+      width:100%;height:100%;border-radius:50%;object-fit:cover;background:var(--card);padding:4px;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+    h1{font-size:2.8rem;font-weight:900;color:var(--text);letter-spacing:1.5px;margin-bottom:.4rem;white-space:nowrap;text-align:left}
+    #role{color:var(--primary);font-size:1.4rem;font-weight:700;min-height:40px;white-space:nowrap;text-align:left}
+    .typed-cursor{color:var(--primary);animation:b 1s infinite}@keyframes b{50%{opacity:0}}
+    .tagline{margin:1.8rem 0 1.5rem;font-size:1.2rem;font-weight:500;letter-spacing:.8px;color:var(--muted);white-space:nowrap;text-align:left}
+    
+    /* STATS -  NO BACKGROUND */
+    .stats{
+      display:flex;
+      justify-content:flex-start;
+      gap:1.2rem;
+      padding:0.5rem 0;
+      overflow-x:auto;
+      white-space:nowrap;
+      margin-bottom:1rem;
+      scrollbar-width:none;
+    }
+    .stats::-webkit-scrollbar{display:none}
+    .stat-card{
+      background: transparent;
+      border:1px solid rgba(0,231,255,.2);
+      border-radius:16px;
+      padding:0.8rem 1.2rem;
+      min-width:90px;
+      transition:all .4s;
+      box-shadow:0 6px 20px rgba(0,0,0,.4);
+      flex-shrink:0;
+      text-align:center;
+    }
+    .stat-card:hover{transform:translateY(-8px);border-color:var(--primary)}
+    .stat-card h3{font-size:1.8rem;font-weight:900;color:var(--primary);margin:0}
+    .stat-card p{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:4px;font-weight:600;white-space:nowrap}
+
+    /* SOCIAL ICONS - BRAND COLORS */
+    .social-row {
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-top: 1rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .social-row a {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1.5px solid rgba(0,231,255,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all .3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,.4);
+      cursor: pointer;
+    }
+    .social-row a:hover {
+      background: var(--primary);
+      color: #000 !important;
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 0 8px 18px rgba(0,231,255,.5);
+    }
+    .social-row a:nth-child(1) { color: #fff; }
+    .social-row a:nth-child(2) { color: #ff0000; }
+    .social-row a:nth-child(3) { color: #0a66c2; }
+    .social-row a:nth-child(4) { color: #000; }
+    .social-row a:nth-child(5) { color: #ea4335; }
+
+    /* CONTACT POPUP - POSITIONED ABOVE EMAIL ICON */
+    #contact-popup {
+      position: absolute;
+      background: rgba(13,17,28,.95);
+      backdrop-filter: blur(20px);
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 1.6rem 1.8rem;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.7), 0 0 50px rgba(0,231,255,.4);
+      z-index: 99999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .4s ease;
+      scale: 0.8;
+      transform-origin: bottom center;
+    }
+    #contact-popup.show {
+      opacity: 1;
+      visibility: visible;
+      scale: 1;
+    }
+    #contact-popup h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    #contact-popup p {
+      color: var(--text);
+      margin: 0.6rem 0;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    #contact-popup i {
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+    #contact-popup .close-popup {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: color .3s;
+    }
+    #contact-popup .close-popup:hover {
+      color: #ff3b3b;
+    }
+
+    /* OVERLAY */
+    #contact-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,.5);
+      backdrop-filter: blur(6px);
+      z-index: 99998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .4s;
+    }
+    #contact-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* DASHBOARD */
+    .dashboard{
+      background:rgba(13,17,28,.5);
+      backdrop-filter:blur(15px);
+      border-radius:24px;
+      padding:1.6rem;
+      border:1px solid rgba(0,231,255,.15);
+      box-shadow:0 20px 60px rgba(0,0,0,.6);
+      position:relative;
+      margin-top: -2rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(120px,1fr));
+      gap:1rem;
+      margin-top:1rem;
+    }
+    .card{
+      background:rgba(20,25,40,.6);
+      border-radius:14px;
+      padding:1rem;
+      border:1px solid rgba(0,231,255,.1);
+      transition:all .3s;
+      text-align:center;
+      font-size:0.9rem;
+    }
+    .card:hover{
+      transform:translateY(-5px);
+      border-color:var(--primary);
+    }
+    .val{
+      font-size:1.6rem;
+      font-weight:800;
+      color:var(--primary);
+      margin-bottom:2px;
+    }
+    .lbl{
+      font-size:0.7rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:0.8px;
+    }
+    .bars{
+      display:flex;
+      gap:4px;
+      height:70px;
+      align-items:end;
+      justify-content:center;
+      padding:8px 0;
+    }
+    .bar{
+      width:14px;
+      background:linear-gradient(to top,var(--primary),#ff00ff);
+      border-radius:6px;
+      transition:height 1.2s;
+      box-shadow:0 0 20px rgba(0,231,255,.5);
+    }
+    .status-header{
+      grid-column:1/-1;
+      text-align:center;
+      margin-bottom:0.8rem;
+    }
+    .status-header strong{
+      font-size:1.2rem;
+      color:var(--text);
+    }
+    #clock{
+      color:var(--primary);
+      font-size:1.3rem;
+      margin:0.4rem 0;
+    }
+    .status-line{
+      color:#10b981;
+      font-size:0.75rem;
+    }
+    .status-line span{
+      color:var(--primary);
+    }
+
+    section{padding:6rem 5%;text-align:center;display:none}section.active{display:block;animation:f .8s ease}@keyframes f{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.section-title{font-size:3rem;margin-bottom:3rem;color:var(--primary)}.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem;margin-top:3rem}.video-card{background:rgba(13,17,28,.6);border-radius:20px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.5);transition:all .4s;border:1px solid rgba(0,231,255,.2);position:relative}.video-card:hover{transform:translateY(-15px);box-shadow:0 30px 80px rgba(0,231,255,.3)}.video-card iframe,.video-card img{width:100%;height:220px;object-fit:cover;border:none}.video-title{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.8);color:white;padding:0.6rem 1rem;font-size:0.95rem;font-weight:600;text-align:center;backdrop-filter:blur(8px)}
+
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;margin-top:4rem;max-width:1400px;margin-left:auto;margin-right:auto}.service-card{background:rgba(13,17,28,.6);backdrop-filter:blur(15px);border:1px solid rgba(0,231,255,.2);border-radius:24px;padding:2.8rem 2rem;text-align:center;transition:all .5s ease;box-shadow:0 15px 40px rgba(0,0,0,.5);position:relative;overflow:hidden}.service-card:hover{transform:translateY(-20px);border-color:var(--primary);box-shadow:0 30px 80px rgba(0,231,255,.3)}.service-card i{font-size:4.2rem;color:var(--primary);margin-bottom:1.8rem}.service-card h3{font-size:1.6rem;margin-bottom:1rem;color:var(--text)}.service-card p{color:var(--muted);line-height:1.7;font-size:1.05rem}.contact-form{max-width:700px;margin:0 auto;background:rgba(13,17,28,.6);padding:3rem;border-radius:24px;border:1px solid rgba(0,231,255,.2);backdrop-filter:blur(15px)}.contact-form input,.contact-form textarea{width:100%;padding:1rem;margin:1rem 0;background:transparent;border:1px solid rgba(0,231,255,.3);border-radius:12px;color:white;font-size:1rem;outline:none;transition:all .3s}.contact-form input:focus,.contact-form textarea:focus{border-color:var(--primary);box-shadow:0 0 20px rgba(0,231,255,.4)}.contact-form button{background:var(--primary);color:#000;padding:1rem 2.5rem;border:none;border-radius:50px;font-weight:700;cursor:pointer;transition:all .4s;margin-top:1rem}.contact-form button:hover{transform:scale(1.08);box-shadow:0 0 30px rgba(0,231,255,.7)}
+
+    /* CHATBOX */
+    #chatbox{
+      position:fixed;bottom:30px;right:-420px;width:380px;height:520px;background:rgba(13,17,28,.95);
+      backdrop-filter:blur(20px);border:2px solid var(--primary);border-radius:24px;
+      box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 50px rgba(0,231,255,.4);
+      z-index:9999;transition:right .6s cubic-bezier(.175,.885,.32,1.275);
+      display:flex;flex-direction:column;overflow:hidden;
+    }
+    #chatbox.open{right:30px}
+    #chatbox-header{background:var(--primary);color:#000;padding:1.2rem;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:1.2rem;cursor:pointer}
+    #chat-messages{flex:1;padding:1.5rem;overflow-y:auto;color:#ddd;font-size:.95rem;display:flex;flex-direction:column}
+    #chat-messages .msg{margin:12px 0;padding:10px 16px;border-radius:18px;max-width:80%;word-wrap:break-word;align-self:flex-start}
+    #chat-messages .bot{background:rgba(0,231,255,.2);border-bottom-left-radius:4px}
+    #chat-messages .user{background:var(--primary);color:#000;align-self:flex-end;border-bottom-right-radius:4px}
+    #chat-input-area{display:flex;padding:1rem;background:rgba(0,0,0,.3)}
+    #chat-input{flex:1;background:transparent;border:none;outline:none;color:white;font-size:1rem;padding:0 1rem}
+    #chat-input::placeholder{color:#777}
+    #chat-send{background:var(--primary);color:#000;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;transition:all .3s;margin-left:10px}
+    #chat-send:hover{transform:scale(1.15);box-shadow:0 0 20px rgba(0,231,255,.8)}
+
+    @media(max-width:992px){
+      .grid{grid-template-columns:repeat(3,1fr);gap:0.8rem}
+      .card{padding:0.8rem;font-size:0.846rem}
+      .val{font-size:1.4rem}
+      .lbl{font-size:0.65rem}
+      .bars{height:60px}
+      .bar{width:12px}
+    }
+    @media(max-width:768px){
+      .container{grid-template-columns:1fr}
+      .stats{gap:1rem;padding:0.4rem 0}
+      .stat-card{min-width:80px;padding:0.7rem 1rem}
+      .stat-card h3{font-size:1.6rem}
+      .stat-card p{font-size:.6rem}
+      .social-row{padding-left:1rem;gap:8px}
+      .social-row a{width:26px;height:26px;font-size:0.9rem}
+      .grid{grid-template-columns:1fr 1fr}
+    }
+
+    /* NEW: View Online CV Button — matches Download CV perfectly */
+    .view-cv {
+      background: rgba(0,231,255,.08);
+      margin-left: .8rem;
+      padding: .75rem 1.4rem;
+      gap: .5rem;
+    }
+    .view-cv:hover {
+      background: var(--primary);
+      color: #000 !important;
+      transform: translateY(-5px) scale(1.07);
+      box-shadow: 0 25px 60px rgba(0,231,255,.6);
+    }
+    .view-cv i {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-links">
+    <a href="#" class="active" data-section="home">Home</a>
+    <a href="#" data-section="projects">Projects</a> <!-- CHANGED -->
+    <a href="#" data-section="services">Services</a>
+    <a href="#" data-section="contact">Contact</a>
+    <a href="#" id="chat-nav">Chat</a>
+    <a href="https://drive.google.com/drive/folders/1dQzVLuPM2es-C_rvmAXCTfHqUqBwoE8B" download class="download-cv">Download CV</a>
+
+    <!-- NEW: View Online CV Button -->
+    <a href="https://drive.google.com/file/d/1ed5MnY6vmfiRe9bVp6pv1VTl2GQG23Gw/view?usp=drive_link" 
+       target="_blank" 
+       rel="noopener" 
+       class="download-cv view-cv">
+       <i class="fas fa-eye"></i> View Online CV
+    </a>
+  </div>
+</nav>
+
+<!-- HOME SECTION -->
+<section id="home" class="active">
+  <div class="container">
+    <div class="hero">
+      <div class="avatar"><img src="https://media.licdn.com/dms/image/v2/D4E35AQFidxsz7iydYQ/profile-framedphoto-shrink_400_400/B4EZia9yEcGoAg-/0/1754946544437?e=1763690400&v=beta&t=YveCXiia1X4tUrP2gzxfvuIdNfvf-c45nxMbEXFTGXY" alt="Timothy"></div>
+      <h1>Timothy Nwadike</h1>
+      <div id="role"></div>
+      
+      <p class="tagline">Building blazing-fast, live-updating web applications with visuals.</p>
+      <p class="tagline" style="margin-top: 0.5rem; font-size: 1.1rem; color: #a0e7ff;">
+        Hardware & software maintenance,Automating Software via Real Builds.
+      </p>
+      
+      <div class="stats">
+        <div class="stat-card"><h3>10+</h3><p>Years experience</p></div>
+        <div class="stat-card"><h3>30+</h3><p>Projects</p></div>
+        <div class="stat-card"><h3>5+</h3><p>Technologies</p></div>
+        <div class="stat-card"><h3>100+</h3><p>Satisfied Clients</p></div>
+      </div>
+
+      <div class="social-row">
+        <a href="https://github.com/digital1986" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.youtube.com/@timothynwadike1714" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://ng.linkedin.com/in/timothy-nwadike-277a4721a" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://x.com/Timothynwadike" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" id="email-trigger"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <div class="dashboard">
+      <div class="grid">
+        <div class="card status-header">
+          <strong>Live System Monitor</strong>
+          <div id="clock">12:56:44</div>
+          <div class="status-line">Status: <span style="color:#10b981">ONLINE</span> | Uptime: <span id="up">99.980%</span></div>
+        </div>
+        <div class="card"><div class="val" id="cpu">80.3%</div><div class="lbl">CPU Usage</div></div>
+        <div class="card"><div class="val" id="mem">7.9 GB</div><div class="lbl">Memory Used</div></div>
+        <div class="card"><div class="val" id="lat">28 ms</div><div class="lbl">Avg Latency</div></div>
+        <div class="card"><div class="val" id="bw">0.87 GB</div><div class="lbl">Bandwidth</div></div>
+        <div class="card"><div class="val" id="vis">2,924</div><div class="lbl">Visitors Today</div></div>
+        <div class="card"><div class="val" id="dev">1,928</div><div class="lbl">Active Devices</div></div>
+        <div class="card"><div class="val">34.8°C</div><div class="lbl">Server Temp</div></div>
+        <div class="card"><div class="val" style="color:#ff3b3b">5</div><div class="lbl">Active Alerts</div></div>
+        <div class="card" style="grid-column:1/-1"><div class="bars" id="bars"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS SECTION (formerly Portfolio) -->
+<section id="projects">
+  <h2 class="section-title">Featured Projects</h2> <!-- CHANGED -->
+  <div class="video-grid">
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=MIEfrskdpz0" target="_blank">
+        <img src="https://i.ytimg.com/vi/MIEfrskdpz0/maxresdefault.jpg" alt="Automation using Raspberrypi, Buzzer, Temperature and Face recognition">
+      </a>
+      <div class="video-title">AUTOMATION USING RASPBERRYPI, BUZZER, ULTRASONIC SENSOR, TEMPERATURE AND FACE RECOGNITION </div>
+    </div>
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=gWt6KOJNTPc" target="_blank">
+        <img src="https://i.ytimg.com/vi/gWt6KOJNTPc/maxresdefault.jpg" alt="CREATE AI AGENT FOR JOB AND REASEARCH">
+      </a>
+      <div class="video-title">AUTOMATE AI AGENT FOR JOB AND REASEARCH</div>
+    </div>
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=okodJW8DCiI&amp;t=4s" target="_blank">
+        <img src="https://i.ytimg.com/vi/okodJW8DCiI/maxresdefault.jpg" alt="Mobile app development">
+      </a>
+      <div class="video-title">MOBILE APP EARLY DEVELOPMENT</div>
+    </div>
+    <div class="video-card">
+      <a href="https://www.youtube.com/shorts/dMmUSI68O7o" target="_blank">
+        <img src="https://i.ytimg.com/vi/dMmUSI68O7o/maxresdefault.jpg" alt="CERTIFICATIONS">
+      </a>
+      <div class="video-title">CERTIFICATIONS</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <h2 class="section-title">What I Do</h2>
+  <div class="services-grid">
+    <div class="service-card"><i class="fas fa-code"></i><h3>Full-Stack Development</h3><p>End-to-end web apps with React, Next.js, Node.js, Django, and cloud.</p></div>
+    <div class="service-card"><i class="fas fa-mobile-alt"></i><h3>Mobile Apps</h3><p>React Native & Flutter — fast, beautiful, production-ready.</p></div>
+    <div class="service-card"><i class="fas fa-server"></i><h3>Backend & APIs</h3><p>REST, GraphQL, WebSockets, microservices, serverless.</p></div>
+    <div class="service-card"><i class="fas fa-cloud"></i><h3>Cloud & DevOps</h3><p>AWS, GCP, Docker, K8s, CI/CD — scale with zero downtime.</p></div>
+    <div class="service-card"><i class="fas fa-robot"></i><h3>AI & Automation</h3><p>GPT, vision, bots, intelligent workflows.</p></div>
+    <div class="service-card"><i class="fas fa-paint-brush"></i><h3>UI/UX & Motion</h3><p>Framer Motion, GSAP, Three.js — futuristic design.</p></div>
+    
+    <!-- NEW SERVICE ADDED -->
+    <div class="service-card">
+      <i class="fas fa-tools"></i>
+      <h3>Hardware & Software Maintenance</h3>
+      <p>System diagnostics, upgrades, troubleshooting, and ongoing support for both hardware and software environments.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">Get In Touch</h2>
+  <div class="contact-form">
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <input type="email" placeholder="Your Number">
+    <textarea rows="6" placeholder="Your Message"></textarea>
+    <button>Send Message</button>
+  </div>
+</section>
+
+<section id="chat">
+  <h2 class="section-title">Live Chat</h2>
+  <p style="font-size:1.3rem;color:#ccc">Use the chatbox in the corner</p>
+</section>
+
+<!-- FLOATING CHATBOX -->
+<div id="chatbox">
+  <div id="chatbox-header" onclick="toggleChat()"><span>chat with Timothy</span>Close</div>
+  <div id="chat-messages"><div class="msg bot">Hey! How can I help you?</div></div>
+  <div id="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+    <div id="chat-send" onclick="sendMessage()">Send</div>
+  </div>
+</div>
+
+<!-- CONTACT OVERLAY -->
+<div id="contact-overlay"></div>
+
+<script>
+/* NAVIGATION */
+document.querySelectorAll('[data-section]').forEach(l => {
+  l.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    l.classList.add('active');
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById(l.dataset.section);
+    if (target) target.classList.add('active');
+  });
+});
+
+/* CHAT NAV */
+document.getElementById('chat-nav').addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById('home').classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('chatbox').classList.add('open');
+});
+
+/* CHATBOX TOGGLE */
+function toggleChat() {
+  document.getElementById('chatbox').classList.toggle('open');
+}
+
+/* CHAT SEND */
+function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const chat = document.getElementById('chat-messages');
+  chat.innerHTML += `<div class="msg user">${msg}</div>`;
+  input.value = '';
+
+  setTimeout(() => {
+    chat.innerHTML += `<div class="msg bot">Thanks! I'll reply soon.</div>`;
+    chat.scrollTop = chat.scrollHeight;
+  }, 800);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+document.getElementById('chat-input').addEventListener('keypress', e => {
+  if (e.key === 'Enter') sendMessage();
+});
+
+/* LIVE CLOCK */
+setInterval(() => {
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+}, 1000);
+
+/* RANDOM STATS */
+const updateStats = () => {
+  document.getElementById('cpu').textContent = (70 + Math.random() * 15).toFixed(1) + '%';
+  document.getElementById('mem').textContent = (6.5 + Math.random() * 2.5).toFixed(1) + ' GB';
+  document.getElementById('lat').textContent = (20 + Math.random() * 20 | 0) + ' ms';
+  document.getElementById('bw').textContent = (0.5 + Math.random() * 0.8).toFixed(2) + ' GB';
+  document.getElementById('vis').textContent = (2900 + Math.random() * 100 | 0).toLocaleString();
+  document.getElementById('dev').textContent = (1800 + Math.random() * 300 | 0).toLocaleString();
+  document.getElementById('up').textContent = (99.95 + Math.random() * 0.04).toFixed(3) + '%';
+  document.querySelectorAll('.bar').forEach(b => b.style.height = Math.random() * 80 + 15 + '%');
+};
+setInterval(updateStats, 2200);
+updateStats();
+
+/* BARS INITIAL */
+const bars = document.getElementById('bars');
+for (let i = 0; i < 18; i++) {
+  const b = document.createElement('div');
+  b.className = 'bar';
+  b.style.height = Math.random() * 70 + 20 + '%';
+  bars.appendChild(b);
+}
+
+/* TYPING ROLE */
+const roles = ["Full-Stack, Frontend/Backend, Cloud Architect UI Designer"];
+let ri = 0, ci = 0, deleting = false, el = document.getElementById('role');
+function type() {
+  const cur = roles[ri];
+  el.innerHTML = cur.substring(0, ci) + (ci < cur.length ? '<span class="typed-cursor">|</span>' : '');
+  if (!deleting && ci < cur.length) ci++;
+  else if (deleting && ci > 0) ci--;
+  else if (!deleting && ci === cur.length) setTimeout(() => deleting = true, 1600);
+  else if (deleting && ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+  setTimeout(type, deleting ? 70 : 110);
+}
+setTimeout(type, 1000);
+
+/* CONTACT POPUP - POSITIONED ABOVE EMAIL ICON */
+let popup = null;
+let overlay = document.getElementById('contact-overlay');
+
+document.getElementById('email-trigger').addEventListener('click', e => {
+  e.preventDefault();
+
+  if (popup) popup.remove();
+
+  popup = document.createElement('div');
+  popup.id = 'contact-popup';
+  popup.innerHTML = `
+    <button class="close-popup" onclick="closeContactPopup()">x</button>
+    <h3>Contact Info</h3>
+    <p><i class="fas fa-envelope"></i> timmchimezie@gmail.com</p>
+    <p><i class="fas fa-phone"></i> +447752288725</p>
+  `;
+  document.body.appendChild(popup);
+
+  const icon = e.currentTarget;
+  const rect = icon.getBoundingClientRect();
+  const popupRect = popup.getBoundingClientRect();
+
+  const top = rect.top - popupRect.height - 12;
+  const left = rect.left + (rect.width / 2) - (popupRect.width / 2);
+
+  popup.style.top = `${top}px`;
+  popup.style.left = `${left}px`;
+
+  setTimeout(() => {
+    popup.classList.add('show');
+    overlay.classList.add('show');
+  }, 10);
+});
+
+function closeContactPopup() {
+  if (popup) {
+    popup.classList.remove('show');
+    overlay.classList.remove('show');
+    setTimeout(() => {
+      if (popup && popup.parentNode) popup.remove();
+      popup = null;
+    }, 400);
+  }
+}
+overlay.addEventListener('click', closeContactPopup);
+
+/* NEW: CLICK ANYWHERE ON HOME TO CLOSE CHATBOX */
+document.addEventListener('click', function(e) {
+  const homeSection = document.getElementById('home');
+  const chatbox = document.getElementById('chatbox');
+  const chatNav = document.getElementById('chat-nav');
+
+  if (!homeSection.classList.contains('active')) return;
+
+  if (chatbox.classList.contains('open') && !chatbox.contains(e.target) && e.target !== chatNav) {
+    chatbox.classList.remove('open');
+  }
+});
+</script>
+
+</body>
+</html>
